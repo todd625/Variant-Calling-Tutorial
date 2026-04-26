@@ -80,35 +80,53 @@ This tutorial runs on the **Ohio Supercomputer Center (OSC)** under allocation
 ### Shared directory structure
 
 ```
-/fs/scratch/PAS3260/Variant_Calling/          (32 GB total, 43 files)
-├── Containers/                               (4.0 GB — 16 .sif files)
+/fs/scratch/PAS3260/Variant_Calling/          (32 GB total, 36 files)
+├── Containers/                               (4.0 GB — 16 .sif files + pull script)
+│   ├── bcftools_1.23.1.sif       (111 MB)
+│   ├── bedtools_2.31.1.sif        (48 MB)
+│   ├── bwamem2_2.2.3.sif          (47 MB)
+│   ├── fastp_1.3.2.sif            (53 MB)
+│   ├── fastqc_0.12.1.sif         (384 MB)
+│   ├── gatk4_4.6.2.0.sif         (797 MB)
+│   ├── multiqc_1.34.sif          (438 MB)
+│   ├── ncbi_datasets_18.24.sif    (58 MB)
+│   ├── picard_3.4.0.sif          (683 MB)
+│   ├── plink_1.90b7.sif           (59 MB)
+│   ├── pull_all_containers.sh      (4.6 KB)
+│   ├── samtools_1.23.1.sif        (67 MB)
+│   ├── snpeff_5.4.0c.sif         (415 MB)
+│   ├── sratools_3.2.1.sif        (249 MB)
+│   ├── stacks_2.68.sif           (537 MB)
+│   ├── star_2.7.11b.sif           (72 MB)
+│   └── vcftools_0.1.17.sif        (68 MB)
 └── Data/                                     (28 GB)
+    ├── GBS/                                  (1.2 GB — SE 101 bp, ApeKI simulated)
+    │   ├── barcodes.tsv                      (65 B — barcode-to-sample mapping)
+    │   └── GBS_multiplexed.fastq.gz          (1.2 GB — all 5 samples multiplexed)
     ├── Reference/                            (223 MB)
     │   ├── fasta/
     │   │   └── Athaliana_TAIR10.fasta        (116 MB)
     │   └── gff/
     │       └── Athaliana_TAIR10.gff3         (107 MB)
-    ├── WGS/                                  (14 GB — PE 101 bp, HiSeq 2000)
-    │   ├── Vas-0_R1.fastq.gz / _R2.fastq.gz (1.3 GB each)
-    │   ├── Bez-9_R1.fastq.gz / _R2.fastq.gz (1.6 GB each)
-    │   ├── Gen-8_R1.fastq.gz / _R2.fastq.gz (950 MB / 930 MB)
-    │   ├── Mah-6_R1.fastq.gz / _R2.fastq.gz (1.0 GB / 1.1 GB)
-    │   └── Usa-0_R1.fastq.gz / _R2.fastq.gz (2.2 GB each)
-    ├── GBS/                                  (1.4 GB — SE 101 bp, ApeKI simulated)
-    │   ├── Vas-0_GBS.fastq.gz               (275 MB)
-    │   ├── Bez-9_GBS.fastq.gz               (232 MB)
-    │   ├── Gen-8_GBS.fastq.gz               (152 MB)
-    │   ├── Mah-6_GBS.fastq.gz               (222 MB)
-    │   ├── Usa-0_GBS.fastq.gz               (496 MB)
-    │   ├── ApeKI_sites.bed                  (3.1 MB — cut site positions)
-    │   └── ApeKI_GBS_windows.bed            (1.2 MB — ±200 bp windows, merged)
-    └── RNA-seq/                              (13 GB — SE 100 bp, HiSeq 2500)
-        ├── Vas-0_rnaseq.fastq.gz            (763 MB)
-        ├── Bez-9_rnaseq.fastq.gz            (2.6 GB)
-        ├── Gen-8_rnaseq.fastq.gz            (3.2 GB)
-        ├── Mah-6_rnaseq.fastq.gz            (2.9 GB)
-        └── Usa-0_rnaseq.fastq.gz            (3.1 GB)
+    ├── RNA-seq/                              (13 GB — SE 100 bp, HiSeq 2500)
+    │   ├── Bez-9_rnaseq.fastq.gz            (2.6 GB)
+    │   ├── Gen-8_rnaseq.fastq.gz            (3.2 GB)
+    │   ├── Mah-6_rnaseq.fastq.gz            (2.9 GB)
+    │   ├── Usa-0_rnaseq.fastq.gz            (3.1 GB)
+    │   └── Vas-0_rnaseq.fastq.gz            (763 MB)
+    └── WGS/                                  (14 GB — PE 101 bp, HiSeq 2000)
+        ├── Bez-9_R1.fastq.gz / _R2.fastq.gz (1.6 GB each)
+        ├── Gen-8_R1.fastq.gz / _R2.fastq.gz (950 MB / 930 MB)
+        ├── Mah-6_R1.fastq.gz / _R2.fastq.gz (1.0 GB / 1.1 GB)
+        ├── Usa-0_R1.fastq.gz / _R2.fastq.gz (2.2 GB each)
+        └── Vas-0_R1.fastq.gz / _R2.fastq.gz (1.3 GB each)
 ```
+
+> **Note on GBS data.** The shared GBS directory contains a single
+> multiplexed FASTQ file (`GBS_multiplexed.fastq.gz`) and a barcode file
+> (`barcodes.tsv`). These replace the earlier per-sample GBS files. Module 03
+> uses `process_radtags` to demultiplex this file into per-sample reads as
+> the first hands-on step. See Module 03 for the full rationale.
 
 ### Container inventory
 
