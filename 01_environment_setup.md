@@ -16,10 +16,10 @@
 > interactive commands:
 >
 > ```bash
-> export user_name=<your_username>
-> export VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
-> export SHARED=/fs/scratch/PAS3260/Variant_Calling/Data
-> export CONTAINERS=/fs/scratch/PAS3260/Variant_Calling/Containers
+export user_name=Fiona                                   # your OSC login
+export VARCALL=/fs/scratch/PAS3260/Fiona/VariantCalling     # your working directory
+export SHARED=/fs/scratch/PAS3260/Variant_Calling/Data             # shared read-only data
+export CONTAINERS=/fs/scratch/PAS3260/Variant_Calling/Containers   # shared containers
 > ```
 >
 > These four variables are referenced by every interactive command in this
@@ -132,7 +132,7 @@ they are available in every session and every SLURM job you submit.
 cat >> ~/.bashrc << EOF
 
 # ---- HCS 7004 Variant Calling Tutorial ----
-export user_name=<your_username>
+export user_name=Fiona
 export VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 export SHARED=/fs/scratch/PAS3260/Variant_Calling/Data
 export CONTAINERS=/fs/scratch/PAS3260/Variant_Calling/Containers
@@ -165,7 +165,7 @@ cp ${CONTAINERS}/*.sif ${VARCALL}/containers/
 
 # Verify — expect 16 .sif files
 ls -lh ${VARCALL}/containers/
-echo "Container count: $(ls ${VARCALL}/containers/*.sif | wc -l)  (expected: 16)"
+echo "Container count: $(ls ${VARCALL}/containers/*.sif | wc -l)
 ```
 
 ### Container inventory
@@ -302,8 +302,8 @@ cat > ${VARCALL}/scripts/01a_bwa_index.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 
 echo "=== BWA-MEM2 index: $(date) ==="
@@ -358,8 +358,7 @@ cat > ${VARCALL}/scripts/01b_star_index.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 
 echo "=== STAR genome index: $(date) ==="
@@ -409,8 +408,7 @@ cat > ${VARCALL}/scripts/01c_seq_dict.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 
 echo "=== GATK sequence dictionary: $(date) ==="
@@ -560,8 +558,7 @@ cat > ${VARCALL}/scripts/01d_fastqc_raw.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 
 echo "=== FastQC job ${SLURM_ARRAY_TASK_ID}: $(date) ==="
@@ -642,8 +639,7 @@ cat > ${VARCALL}/scripts/01e_fastp_trim.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 FASTP_DIR=${VARCALL}/02_qc/fastp
 
@@ -768,8 +764,7 @@ cat > ${VARCALL}/scripts/01f_multiqc.sh << 'EOF'
 
 set -euo pipefail
 
-# ↓ Replace <your_username> with your OSC username (e.g. jsmith)
-user_name=<your_username>
+user_name=Fiona
 VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling
 
 echo "=== MultiQC: $(date) ==="
