@@ -16,8 +16,8 @@
 > what to expect:
 >
 > ```bash
-> export user_name=<your_username>                                    # your OSC login
-> export VARCALL=/fs/scratch/PAS3260/${user_name}/variant_calling     # your working directory
+> export user_name=Fiona                                   # your OSC login
+> export VARCALL=/fs/scratch/PAS3260/Fiona/VariantCalling     # your working directory
 > export SHARED=/fs/scratch/PAS3260/Variant_Calling/Data             # shared read-only data
 > export CONTAINERS=/fs/scratch/PAS3260/Variant_Calling/Containers   # shared containers
 > ```
